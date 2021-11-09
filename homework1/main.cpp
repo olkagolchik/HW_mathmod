@@ -54,7 +54,6 @@ int main() {
 
             x=atof( values[0].c_str() );
             y=atof( values[1].c_str() );
-            std::cout << "test: " <<x << " " << y << "\n";
             if(isFirstLine){
                 isFirstLine= false;
                 xn=(-1)*x;
