@@ -66,7 +66,6 @@ int main() {
                     min_d_l=0;
                     fx_l=x;
                     fy_l=y;
-                    std::cout << "test: " << x << " " << y << "\n";
                     continue;
                 }
                 if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
