@@ -54,6 +54,11 @@ int main() {
 
             x=atof( values[0].c_str() );
             y=atof( values[1].c_str() );
+            if(x==abs(xn) && y==abs(yn)){
+                min_d_l=0;
+                fx_l=x;
+                fy_l=y;
+            }
             if(isFirstLine){
                 isFirstLine= false;
                 xn=(-1)*x;
