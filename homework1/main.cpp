@@ -54,11 +54,7 @@ int main() {
 
             x=atof( values[0].c_str() );
             y=atof( values[1].c_str() );
-            if(x==abs(xn) && y==abs(yn)){
-                min_d_l=0;
-                fx_l=x;
-                fy_l=y;
-            }
+
             if(isFirstLine){
                 isFirstLine= false;
                 xn=(-1)*x;
@@ -66,7 +62,13 @@ int main() {
             }
             else{
                 double _cos=(xn*x+yn*y)/(sqrt(pow(x,2)+pow(y,2))*sqrt(pow(xn,2)+pow(yn,2)));
-
+                if(abs(x)== abs(xn) && abs(y)== abs(yn) ){
+                    min_d_l=0;
+                    fx_l=x;
+                    fy_l=y;
+                    std::cout << "test: " << x << " " << y << "\n";
+                    continue;
+                }
                 if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
                     if(isTwiceLine_r){
                         isTwiceLine_r= false;
@@ -83,13 +85,16 @@ int main() {
                     }
                 }
                 else{
+
                     if(isTwiceLine_l){
                         isTwiceLine_l= false;
                         min_d_l=finde_value-_cos;
                         fx_l=x;
                         fy_l=y;
+
                     }
                     else{
+
                         if(finde_value-_cos<=min_d_l){
                             min_d_l=finde_value-_cos;
                             fx_l=x;
