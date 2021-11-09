@@ -62,6 +62,7 @@ int main() {
             }
             else{
                 double _cos=(xn*x+yn*y)/(sqrt(pow(x,2)+pow(y,2))*sqrt(pow(xn,2)+pow(yn,2)));
+                _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
                 if(abs(x)== abs(xn) && abs(y)== abs(yn) ){
                     min_d_l=0;
                     fx_l=x;
