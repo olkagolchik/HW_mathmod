@@ -98,8 +98,8 @@ int main() {
     }
     in.close();
 
-    std::cout << "Leftmost: " << fx_l << " " << fy_l << "\n";
-    std::cout << "Rightmost: " << fx_r << " " << fy_r << "\n";
+    std::cout << "Leftmost: " << fx_r << " " << fy_r << "\n";
+    std::cout << "Rightmost: " << fx_l << " " << fy_l << "\n";
 
     return 0;
 }
