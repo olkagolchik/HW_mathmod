@@ -35,8 +35,8 @@ int main() {
     std::string line;
     double xn=0,yn=0,fx_r =0,fy_r=0,fx_l=0,fy_l=0;
     double finde_value=1;
-    double min_d_r=10;
-    double min_d_l=10;
+    double min_d_r=1;
+    double min_d_l=1;
     bool isFirstLine= true;
     bool isTwiceLine_r= true,isTwiceLine_l= true;
     std::ifstream in("in.txt");
@@ -66,13 +66,13 @@ int main() {
             else{
                 double _cos=(xn*x+yn*y)/(sqrt(x*x+y*y)*sqrt(xn*xn+yn*yn));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
-                if(((xn*y-yn*x)<0) && (finde_value-_cos<=min_d_r)){
-                    min_d_r=finde_value-_cos;
+                if(((xn*y-yn*x)<0) && (finde_value+_cos<=min_d_r)){
+                    min_d_r=finde_value+_cos;
                     fx_r=x;
                     fy_r=y;
                 }
-                if(((xn*y-yn*x)>=0) && (finde_value-_cos<=min_d_l)){
-                    min_d_l=finde_value-_cos;
+                if(((xn*y-yn*x)>=0) && (finde_value+_cos<=min_d_l)){
+                    min_d_l=finde_value+_cos;
                     fx_l=x;
                     fy_l=y;
                 }
