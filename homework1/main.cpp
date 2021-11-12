@@ -33,7 +33,7 @@ std::tuple<int, int> step(int dividend, int divisor) {
 }
 int main() {
     std::string line;
-    int xn=0,yn=0,fx_r =0,fy_r=0,fx_l=0,fy_l=0;
+    double xn=0,yn=0,fx_r =0,fy_r=0,fx_l=0,fy_l=0;
     double finde_value=1;
     double min_d_r=1;
     double min_d_l=1;
@@ -42,8 +42,8 @@ int main() {
     std::ifstream in("in.txt");
     if (in.is_open())
     {
-        int x =0;
-        int y=0;
+        double x =0;
+        double y=0;
         while (getline(in, line))
         {
 
@@ -52,8 +52,8 @@ int main() {
             }
             string *values=StringToMass(line,' ',2);
 
-            x=atoi( values[0].c_str() );
-            y=atoi( values[1].c_str() );
+            x=atof( values[0].c_str() );
+            y=atof( values[1].c_str() );
 
             if(isFirstLine){
                 isFirstLine= false;
