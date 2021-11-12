@@ -28,9 +28,12 @@ string * StringToMass(string base_str, char delim, int size){
 
     return mass_str;
 }
+std::tuple<int, int> step(int dividend, int divisor) {
+    return  std::make_tuple(dividend / divisor, dividend % divisor);
+}
 int main() {
-    //std::string line;
-    int xn=0,yn=0,fx_r =0,fy_r=0,fx_l=0,fy_l=0;
+    std::string line;
+    double xn=0,yn=0,fx_r =0,fy_r=0,fx_l=0,fy_l=0;
     double finde_value=1;
     double min_d_r=1;
     double min_d_l=1;
@@ -39,17 +42,19 @@ int main() {
     std::ifstream in("in.txt");
     if (in.is_open())
     {
-        int x,y;
-        while (in>> x >> y)
+        double x =0;
+        double y=0;
+        while (getline(in, line))
         {
-           /* if(line.length() == 0){
+
+            if(line.length() == 0){
                 continue;
-            }*/
-           /* string *values=StringToMass(line,' ',2);
+            }
+            string *values=StringToMass(line,' ',2);
 
             x=atof( values[0].c_str() );
             y=atof( values[1].c_str() );
-*/
+
             if(isFirstLine){
                 isFirstLine= false;
                 xn=(-1)*x;
@@ -98,7 +103,7 @@ int main() {
                     }
                 }
             }
-            //delete[] values;
+            delete[] values;
         }
     }
     in.close();
