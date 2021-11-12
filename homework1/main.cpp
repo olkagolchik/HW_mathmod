@@ -69,38 +69,18 @@ int main() {
                 }
                 double _cos=(xn*x+yn*y)/(sqrt(pow(x,2)+pow(y,2))*sqrt(pow(xn,2)+pow(yn,2)));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
-                if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
-                    if(isTwiceLine_r){
-                        isTwiceLine_r= false;
-                        min_d_r=_cos;
-                        fx_r=x;
-                        fy_r=y;
-                    }
-                    else{
-                        if(_cos<=min_d_r){
-                            min_d_r=_cos;
-                            fx_r=x;
-                            fy_r=y;
-                        }
-                    }
+                if (_cos-min_d_l <= 0 && ((xn-0)*(y-0)-(yn-0)*(x-0))>0)
+                {
+                    min_d_l = _cos;
+                    fx_r = x;
+                    fy_r = y;
+
                 }
-                else{
-
-                    if(isTwiceLine_l){
-                        isTwiceLine_l= false;
-                        min_d_l=_cos;
-                        fx_l=x;
-                        fy_l=y;
-
-                    }
-                    else{
-
-                        if(_cos<=min_d_l){
-                            min_d_l=_cos;
-                            fx_l=x;
-                            fy_l=y;
-                        }
-                    }
+                if (_cos-min_d_r <= 0 && ((xn-0)*(y-0)-(yn-0)*(x-0))<=0)
+                {
+                    min_d_r = _cos;
+                    fx_l = x;
+                    fy_l = y;
                 }
             }
             delete[] values;
