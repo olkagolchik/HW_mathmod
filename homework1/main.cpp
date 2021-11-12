@@ -66,37 +66,15 @@ int main() {
             else{
                 double _cos=(xn*x+yn*y)/(sqrt(x*x+y*y)*sqrt(xn*xn+yn*yn));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
-                if((xn*y-yn*x)<0){
-                    if(isTwiceLine_r){
-                        isTwiceLine_r= false;
-                        min_d_r=finde_value-_cos;
-                        fx_r=x;
-                        fy_r=y;
-                    }
-                    else{
-                        if(finde_value-_cos<=min_d_r){
-                            min_d_r=finde_value-_cos;
-                            fx_r=x;
-                            fy_r=y;
-                        }
-                    }
+                if(((xn*y-yn*x)<0) && (finde_value+_cos<=min_d_r)){
+                    min_d_r=finde_value+_cos;
+                    fx_r=x;
+                    fy_r=y;
                 }
-                else{
-
-                    if(isTwiceLine_l){
-                        isTwiceLine_l= false;
-                        min_d_l=finde_value-_cos;
-                        fx_l=x;
-                        fy_l=y;
-                    }
-                    else{
-
-                        if(finde_value-_cos<=min_d_l){
-                            min_d_l=finde_value-_cos;
-                            fx_l=x;
-                            fy_l=y;
-                        }
-                    }
+                if(((xn*y-yn*x)>=0) && (finde_value+_cos<=min_d_l)){
+                    min_d_l=finde_value+_cos;
+                    fx_l=x;
+                    fy_l=y;
                 }
             }
             delete[] values;
