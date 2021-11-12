@@ -67,7 +67,7 @@ int main() {
                 if(x==0 && y==0){
                     continue;
                 }
-                double _cos=(xn*x+yn*y)/(sqrt(x*x+y*y)*sqrt(xn*xn+yn*yn));
+                double _cos=(xn*x+yn*y)/(sqrt(pow(x,2)+pow(y,2))*sqrt(pow(xn,2)+pow(yn,2)));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
                 if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
                     if(isTwiceLine_r){
