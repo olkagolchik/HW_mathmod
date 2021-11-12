@@ -37,6 +37,9 @@ int main() {
     double finde_value=1;
     double min_d_r=1;
     double min_d_l=1;
+    int cos_r=1;
+    int cos_l=1;
+
     bool isFirstLine= true;
     bool isTwiceLine_r= true,isTwiceLine_l= true;
     std::ifstream in("in.txt");
@@ -57,8 +60,8 @@ int main() {
 
             if(isFirstLine){
                 isFirstLine= false;
-                xn=(-1)*x;
-                yn=(-1)*y;
+                xn=x;
+                yn=y;
                 if(x==0 && y==0){
                     break;
                 }
@@ -69,37 +72,18 @@ int main() {
                 }
                 double _cos=(xn*x+yn*y)/(sqrt(pow(x,2)+pow(y,2))*sqrt(pow(xn,2)+pow(yn,2)));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
-                if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
-                    if(isTwiceLine_r){
-                        isTwiceLine_r= false;
-                        min_d_r=finde_value-_cos;
-                        fx_r=x;
-                        fy_r=y;
-                    }
-                    else{
-                        if(finde_value-_cos<=min_d_r){
-                            min_d_r=finde_value-_cos;
-                            fx_r=x;
-                            fy_r=y;
-                        }
+                if(((xn-0)*(y-0)-(yn-0)*(x-0))>0){
+                    if(_cos<=cos_l){
+                        cos_l=_cos;
+                        fx_l=x;
+                        fy_l=y;
                     }
                 }
                 else{
-
-                    if(isTwiceLine_l){
-                        isTwiceLine_l= false;
-                        min_d_l=finde_value-_cos;
-                        fx_l=x;
-                        fy_l=y;
-
-                    }
-                    else{
-
-                        if(finde_value-_cos<=min_d_l){
-                            min_d_l=finde_value-_cos;
-                            fx_l=x;
-                            fy_l=y;
-                        }
+                    if(_cos<=cos_r){
+                        cos_r=_cos;
+                        fx_r=x;
+                        fy_r=y;
                     }
                 }
             }
@@ -108,8 +92,8 @@ int main() {
     }
     in.close();
 
-    std::cout << "Leftmost: " << fx_r << " " << fy_r << "\n";
-    std::cout << "Rightmost: " << fx_l << " " << fy_l << "\n";
+    std::cout << "Leftmost: " << fx_l << " " << fy_l << "\n";
+    std::cout << "Rightmost: " << fx_r << " " << fy_r << "\n";
 
     return 0;
 }
