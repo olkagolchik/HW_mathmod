@@ -64,12 +64,9 @@ int main() {
                 }
             }
             else{
-                if(x==0 && y==0){
-                    continue;
-                }
                 double _cos=(xn*x+yn*y)/(sqrt(x*x+y*y)*sqrt(xn*xn+yn*yn));
                 _cos = std::round(_cos * 10000000000.0) / 10000000000.0;
-                if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
+                if((xn*y-yn*x)<0){
                     if(isTwiceLine_r){
                         isTwiceLine_r= false;
                         min_d_r=finde_value-_cos;
@@ -91,7 +88,6 @@ int main() {
                         min_d_l=finde_value-_cos;
                         fx_l=x;
                         fy_l=y;
-
                     }
                     else{
 
