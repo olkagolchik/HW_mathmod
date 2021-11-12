@@ -57,8 +57,8 @@ int main() {
 
             if(isFirstLine){
                 isFirstLine= false;
-                xn=(-1)*x;
-                yn=(-1)*y;
+                xn=x;
+                yn=y;
                 if(x==0 && y==0){
                     break;
                 }
@@ -72,13 +72,13 @@ int main() {
                 if(((xn-0)*(y-0)-(yn-0)*(x-0))<0){
                     if(isTwiceLine_r){
                         isTwiceLine_r= false;
-                        min_d_r=finde_value-_cos;
+                        min_d_r=_cos;
                         fx_r=x;
                         fy_r=y;
                     }
                     else{
-                        if(finde_value-_cos<=min_d_r){
-                            min_d_r=finde_value-_cos;
+                        if(_cos<=min_d_r){
+                            min_d_r=_cos;
                             fx_r=x;
                             fy_r=y;
                         }
@@ -88,15 +88,15 @@ int main() {
 
                     if(isTwiceLine_l){
                         isTwiceLine_l= false;
-                        min_d_l=finde_value-_cos;
+                        min_d_l=_cos;
                         fx_l=x;
                         fy_l=y;
 
                     }
                     else{
 
-                        if(finde_value-_cos<=min_d_l){
-                            min_d_l=finde_value-_cos;
+                        if(_cos<=min_d_l){
+                            min_d_l=_cos;
                             fx_l=x;
                             fy_l=y;
                         }
