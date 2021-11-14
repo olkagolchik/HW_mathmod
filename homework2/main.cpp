@@ -249,7 +249,6 @@ int main(int argc, char** argv) {
         int m = 0;
         while (getline(in, line)) // перебор столбов
         {
-            std::cout<< "aaaaa"<<line.length()<<line <<std::endl;
             if (line.length() != 0) {
                 m++;
             }
