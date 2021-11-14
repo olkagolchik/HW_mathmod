@@ -18,14 +18,14 @@ string * StringToMass(string base_str, char delim, int size){
         {
             mass_str[i] = temp;
             i++;
+            if(i==size){
+                break;
+            }
         }
         pos += temp.size() + delim_size;
     }
 
     return mass_str;
-}
-std::tuple<int, int> step(int dividend, int divisor) {
-    return  std::make_tuple(dividend / divisor, dividend % divisor);
 }
 //functions
 double calc(double y_0, int direction, double v_y, double v_x, double x, double x_0, double x_d, double g, double v_0){
@@ -50,7 +50,8 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
             string *mass_bollards = new string[m];
 
             int k= 0;
-            double x,y,new_y;
+            double x=0,y=0,new_y=0;
+
             while (getline(in2, line)) // перебераем столбы
             {
 
@@ -61,6 +62,10 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                     string *values_start=StringToMass("0 "+line,' ',2);
                     y_0=atof( values_start[1].c_str() );
                     x_0=atof( values_start[0].c_str() );
+                    if(line.length() == 0){
+                        std::cout <<"0" << std::endl;
+                        break;
+                    }
                     delete[] values_start;
                     continue;
                 }
@@ -70,15 +75,21 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                     v_x=atof( values_start[0].c_str() );
                     v_y=atof( values_start[1].c_str() );
                     v_0= sqrt(pow(v_x,2)+pow(v_y,2));
+                    if(line.length() == 0 || abs(v_x)+abs(v_y)==0 ){
+                        std::cout <<"0" << std::endl;
+                        break;
+                    }
                     delete[] values_start;
                     continue;
                 }
                 string *values=StringToMass(line,' ',2);
                 x=atof( values[0].c_str() );
                 y=atof( values[1].c_str() );
+
                     //проверка столбика
                     new_y=calc(y_0, direction, v_y,  v_x,  x,  x_0,  x_d,  g,  v_0);
-                    if(x==x_0){
+
+                    if(x<=x_0){
                         std::cout <<"0" << std::endl;
                         break;
                     }
@@ -110,6 +121,7 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                             }
                             delete[] mass_bollards_2_1;
                             mass_size=k-1;
+
                             delete[] values;
                             flight(file_name,index,mass_size,mass_bollards_2,direction, g, y_0, x_0,  x_d,  v_x,  v_y,  v_0, number_of_bollard);
                             break;
@@ -120,7 +132,6 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                         }
                     }
                     else{ // не попали
-
                         number_of_bollard+=direction*1;
                         //сохранение координат в массив
                         mass_bollards[k-2]=line;
@@ -238,13 +249,19 @@ int main(int argc, char** argv) {
         int m = 0;
         while (getline(in, line)) // перебор столбов
         {
+            std::cout<< "aaaaa"<<line.length()<<line <<std::endl;
             if (line.length() != 0) {
                 m++;
             }
         }
-        mass_size=m;
-        string *mass_bollards = new string[m];
-        flight(argv[1],index,mass_size, mass_bollards, direction, g, y_0, x_0, x_d, v_x, v_y, v_0,number_of_bollard);
+        if(m >2){
+            mass_size=m;
+            string *mass_bollards = new string[m];
+            flight(argv[1],index,mass_size, mass_bollards, direction, g, y_0, x_0, x_d, v_x, v_y, v_0,number_of_bollard);
+        }
+        else{
+            std::cout <<"0" << std::endl;
+        }
     }
     //
     return 0;
