@@ -28,10 +28,10 @@ string * StringToMass(string base_str, char delim, int size){
     return mass_str;
 }
 //functions
-double calc(double y_0, int direction, double v_y, double v_x, double x, double x_0, double x_d, double g, double v_0){
-    return y_0+direction*(v_y/v_x)*(x-x_0-2*x_d)-g*(pow(x-x_0-2*x_d,2)/(2*pow(v_0,2)));
+double calc(double y_0, int direction, double v_y, double v_x, double x, double x_0, double x_d, double g){
+    return y_0+direction*(v_y/v_x)*(x-x_0-2*x_d)-g*(pow(x-x_0-2*x_d,2)/(2*pow(v_x,2)));
 }
-void flight(string file_name,int index, int mass_size,string *mass_bollards,int direction, double g, double y_0,double x_0, double x_d, double v_x, double v_y, double v_0, int number_of_bollard){
+void flight(string file_name,int index, int mass_size,string *mass_bollards,int direction, double g, double y_0,double x_0, double x_d, double v_x, double v_y, int number_of_bollard){
     if(index == 0){// первый вход - наполняем массив столбов до первого пападания
         std::string line;
         std::ifstream in(file_name); // открываем файл для чтения
@@ -74,7 +74,6 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                     x_d=0; // коэф смещения
                     v_x=atof( values_start[0].c_str() );
                     v_y=atof( values_start[1].c_str() );
-                    v_0= sqrt(pow(v_x,2)+pow(v_y,2));
                     if(line.length() == 0 || abs(v_x)+abs(v_y)==0 ){
                         std::cout <<"0" << std::endl;
                         break;
@@ -87,7 +86,7 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                 y=atof( values[1].c_str() );
 
                     //проверка столбика
-                    new_y=calc(y_0, direction, v_y,  v_x,  x,  x_0,  x_d,  g,  v_0);
+                    new_y=calc(y_0, direction, v_y,  v_x,  x,  x_0,  x_d,  g);
 
                     if(x<=x_0){
                         std::cout <<"0" << std::endl;
@@ -123,7 +122,7 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                             mass_size=k-1;
 
                             delete[] values;
-                            flight(file_name,index,mass_size,mass_bollards_2,direction, g, y_0, x_0,  x_d,  v_x,  v_y,  v_0, number_of_bollard);
+                            flight(file_name,index,mass_size,mass_bollards_2,direction, g, y_0, x_0,  x_d,  v_x,  v_y, number_of_bollard);
                             break;
                         }
                         else{
@@ -160,7 +159,7 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
             x=atof( values[0].c_str() );
             y=atof( values[1].c_str() );
             //проверка столбика
-            new_y=calc(y_0, direction, v_y,  v_x,  x,  x_0,  x_d,  g,  v_0);
+            new_y=calc(y_0, direction, v_y,  v_x,  x,  x_0,  x_d,  g);
             if(x==x_0){
                 std::cout <<"0" << std::endl;
                 break;
@@ -196,7 +195,7 @@ void flight(string file_name,int index, int mass_size,string *mass_bollards,int 
                     delete[] mass_bollards_2_1;
                     mass_size=k;
                     //-------
-                    flight(file_name,index,mass_size,mass_bollards_2,direction, g, y_0, x_0,  x_d,  v_x,  v_y,  v_0, number_of_bollard);
+                    flight(file_name,index,mass_size,mass_bollards_2,direction, g, y_0, x_0,  x_d,  v_x,  v_y, number_of_bollard);
                     break;
                 }
                 else{
@@ -237,7 +236,6 @@ int main(int argc, char** argv) {
     double x_d=0; // коэффициент смещения
     double v_x=3; // компонента скорости по x
     double v_y=1; // компонента скорости по y
-    double v_0= sqrt(pow(v_x,2)+pow(v_y,2));
     int direction = 1; //направо - true; налево - false
     int index = 0;
     int mass_size=0;
@@ -256,7 +254,7 @@ int main(int argc, char** argv) {
         if(m >2){
             mass_size=m;
             string *mass_bollards = new string[m];
-            flight(argv[1],index,mass_size, mass_bollards, direction, g, y_0, x_0, x_d, v_x, v_y, v_0,number_of_bollard);
+            flight(argv[1],index,mass_size, mass_bollards, direction, g, y_0, x_0, x_d, v_x, v_y,number_of_bollard);
         }
         else{
             std::cout <<"0" << std::endl;
